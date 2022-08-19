@@ -1,5 +1,10 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import {
+    AiOutlineArrowRight,
+    AiOutlineShoppingCart,
+    AiOutlineCreditCard
+} from "react-icons/ai";
 
 const ItemList = () => {
 
@@ -48,31 +53,52 @@ const ItemList = () => {
                             <div className='item' key={item}>
 
                                 {/* Left column */}
-                                <div>
+                                <div className='left_column'>
                                     {/* Left TOP */}
-                                    <div>
-                                        <div>Image</div>
+                                    <div className='image_container'>
+                                        <div
+                                            className='image'
+                                            onClick={() => { navigate(`/${1}`) }}>
+                                            Image
+                                        </div>
                                     </div>
                                     {/* Left BOTTOM */}
-                                    <div>
-                                        <button>add to cart</button>
+                                    <div className='button_container'>
+                                        <button>
+                                            <AiOutlineShoppingCart /> Add to cart
+                                        </button>
                                     </div>
-
                                 </div>
 
                                 {/* Right column */}
-                                <div>
+                                <div className='right_column'>
+
                                     {/* Right TOP */}
-                                    <div>
+                                    <div className='description_container'>
                                         <div>Description</div>
-                                        <div>
-                                            <div onClick={() => { navigate(`/${1}`) }}>Details</div>
+                                        <div className='details_button'>
+                                            <div onClick={() => { navigate(`/${1}`) }}>
+                                                View Details <AiOutlineArrowRight />
+                                            </div>
+                                        </div>
+                                        <div className='price'>
+                                            199.00
                                         </div>
                                     </div>
+
                                     {/* Right BOTTOM */}
-                                    <div>
-                                        <button>Buy now</button>
+                                    <div className='button_container'>
+                                        <button>
+                                            Buy now
+                                            <AiOutlineCreditCard />
+                                        </button>
                                     </div>
+
+                                    {/* Effects background */}
+                                    <div className='interacting_details_background'></div>
+                                    <div className='interacting_buy_background'></div>
+
+
                                 </div>
 
                             </div>

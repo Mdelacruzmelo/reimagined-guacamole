@@ -21,6 +21,9 @@ code {
 }
 
 /* TEMPLATE CLASSES */
+.transition {
+  transition: 0.1s ease-in;
+}
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -33,6 +36,14 @@ code {
 .flexStart {
   justify-content: flex-start;
   align-items: center;
+}
+.flexCenter {
+  justify-content: center;
+  align-items: center;
+}
+.sizeZero {
+  width: 0px;
+  height: 0px;
 }
 
 /* USED CLASSES */
@@ -60,8 +71,153 @@ code {
     @extend .flex, .flexStart;
 
     .item {
-      padding: 20px;
+      overflow: hidden;
+      padding: 10px;
+      height: 250px;
       width: 25%;
+      z-index: 1;
+      @extend .flex, .flexStart, .transition;
+
+      .left_column {
+        width: 55%;
+        height: 100%;
+        background-color: transparent;
+
+        .button_container {
+          height: 50px;
+          width: 100%;
+          background-color: transparent;
+          @extend .flex, .flexCenter;
+
+          button {
+            width: 100%;
+            border: none;
+            padding: 10px 20px;
+            background-color: transparent;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .image_container {
+          height: calc(100% - 50px);
+          padding: 0px 30px;
+          @extend .transition;
+
+          .image {
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .right_column {
+        width: 45%;
+        height: 100%;
+        position: relative;
+        background-color: transparent;
+
+        .interacting_details_background {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          background-color: $light-color;
+          z-index: -1;
+          @extend .transition, .sizeZero;
+        }
+
+        .interacting_buy_background {
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+          background-color: $primary-color;
+          z-index: -1;
+          @extend .transition, .sizeZero;
+        }
+
+        .button_container {
+          height: 50px;
+          width: 100%;
+          background-color: transparent;
+          z-index: 2;
+          @extend .flex, .flexCenter;
+
+          button {
+            width: 100%;
+            border: none;
+            background-color: $light-color;
+            color: $dark-color-10;
+            padding: 10px;
+            text-align: center;
+            @extend .transition, .flex, .flexBetween;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .description_container {
+          padding-left: 10px;
+          height: calc(100% - 50px);
+          background-color: transparent;
+          z-index: 2;
+
+          .details_button {
+            position: absolute;
+            bottom: 120px;
+            right: 10px;
+            font-size: 0.9rem;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          .price {
+            width: 100%;
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.6rem;
+            position: absolute;
+            right: 10px;
+            bottom: 60px;
+          }
+        }
+      }
+
+      &:hover {
+        box-shadow: 0px 14px 38px -6px #00000082;
+
+        .left_column .image_container {
+          padding: 0px 15px;
+        }
+
+        .right_column {
+          .button_container button {
+            text-align: right;
+            background-color: transparent;
+            color: $lighter-color;
+          }
+          .price {
+            color: $lighter-color;
+          }
+        }
+
+        .interacting_details_background {
+          width: 100%;
+          height: 50%;
+        }
+
+        .interacting_buy_background {
+          width: 100%;
+          height: 50%;
+        }
+      }
     }
   }
 }
