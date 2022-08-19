@@ -3,7 +3,8 @@ import React from 'react'
 const Header = () => {
     return (
         <div>
-            Header component
+            <div>Search input</div>
+            <div>Search button</div>
         </div>
     );
 }
