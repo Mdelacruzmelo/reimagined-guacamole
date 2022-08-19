@@ -47,7 +47,7 @@ code {
 }
 
 /* USED CLASSES */
-.list_page {
+.page {
   background-color: $lighter-color;
   max-width: 1200px;
   margin: 0 auto;
@@ -77,11 +77,11 @@ code {
       .breadcrumb {
         margin-top: 10px;
         font-weight: 0.8rem;
-        text-decoration: underline;
-        font-style: italic;
         @extend .flex, .flexStart;
 
         .breadcrumb_word {
+          text-decoration: underline;
+          font-style: italic;
           &:hover {
             cursor: pointer;
           }
