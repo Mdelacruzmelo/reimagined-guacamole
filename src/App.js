@@ -1,10 +1,8 @@
 import React from 'react'
 import { useRoutes } from "react-router-dom";
-
 import ItemsList from './pages/ItemsList'
 import ItemDetails from './pages/ItemDetails'
 import PageNotFound from './pages/PageNotFound'
-import './App.css';
 
 const App = () => useRoutes([
   { path: "/", element: <ItemsList /> },
