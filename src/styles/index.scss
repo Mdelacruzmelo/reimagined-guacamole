@@ -47,7 +47,7 @@ code {
 }
 
 /* USED CLASSES */
-.page {
+.list_page {
   background-color: $lighter-color;
   max-width: 1200px;
   margin: 0 auto;
@@ -55,18 +55,37 @@ code {
   @extend .flex;
 
   .header {
+    z-index: 3;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     width: 100%;
+    height: 80px;
+    overflow: hidden;
     padding: 20px 20px 0px 20px;
+    background-color: $light-color;
     @extend .flex, .flexBetween;
 
     .main {
       .app_title {
         font-size: 1.5rem;
+        &:hover {
+          cursor: pointer;
+        }
       }
 
-      .bradcrumb {
+      .breadcrumb {
         margin-top: 10px;
         font-weight: 0.8rem;
+        text-decoration: underline;
+        font-style: italic;
+        @extend .flex, .flexStart;
+
+        .breadcrumb_word {
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 
@@ -98,13 +117,24 @@ code {
   }
 
   .subheader {
+    z-index: 3;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
     width: 100%;
     padding: 20px;
+    background-color: $light-color;
     @extend .flex, .flexBetween;
 
     .title {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: 700;
+      width: 300px;
+      @extend .flex, .flexStart;
+
+      .title_word {
+        margin-left: 6px;
+      }
     }
 
     .search {
@@ -133,6 +163,16 @@ code {
     width: 100%;
     @extend .flex, .flexStart;
 
+    .loading {
+      width: 100%;
+      height: 90vh;
+      @extend .flex, .flexCenter;
+
+      .loading_str {
+        margin-right: 20px;
+      }
+    }
+
     .item {
       overflow: hidden;
       padding: 10px;
@@ -159,6 +199,7 @@ code {
             background-color: transparent;
             &:hover {
               cursor: pointer;
+              background-color: $light-color;
             }
           }
         }
@@ -218,6 +259,8 @@ code {
             color: $dark-color-10;
             padding: 10px;
             text-align: center;
+            font-weight: bold;
+
             @extend .transition, .flex, .flexBetween;
             &:hover {
               cursor: pointer;
@@ -249,6 +292,7 @@ code {
             position: absolute;
             right: 10px;
             bottom: 60px;
+            color: $primary-color;
           }
         }
       }

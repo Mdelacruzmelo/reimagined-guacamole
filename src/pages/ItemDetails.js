@@ -4,11 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 const ItemDetails = () => {
 
     const { id } = useParams()
+    console.log('~ id', id)
     const navigate = useNavigate()
-    const navigation = useRef(navigate) // useRef for useEffect dependencies
+    // const navigation = useRef(navigate) // useRef for useEffect dependencies
 
     useEffect(() => {
-        if (isNaN(id)) navigation.current("/404")
+        // if (isNaN(id)) navigation.current("/404")
     }, [id])
 
     return (
