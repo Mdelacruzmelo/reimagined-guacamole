@@ -56,14 +56,77 @@ code {
 
   .header {
     width: 100%;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     @extend .flex, .flexBetween;
+
+    .main {
+      .app_title {
+        font-size: 1.5rem;
+      }
+
+      .bradcrumb {
+        margin-top: 10px;
+        font-weight: 0.8rem;
+      }
+    }
+
+    .cart {
+      position: relative;
+
+      button {
+        background-color: $light-color;
+        border: none;
+        padding: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .cart_count {
+        position: absolute;
+        left: -10px;
+        top: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: $primary-color;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
 
   .subheader {
     width: 100%;
     padding: 20px;
     @extend .flex, .flexBetween;
+
+    .title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .search {
+      width: 200px;
+      @extend .flex, .flexBetween;
+
+      input {
+        height: 40px;
+        width: calc(100% - 40px);
+        padding: 10px;
+        font-size: 1.1rem;
+      }
+
+      button {
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .items {

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {
     AiOutlineArrowRight,
     AiOutlineShoppingCart,
-    AiOutlineCreditCard
+    AiOutlineCreditCard,
+    AiOutlineSearch
 } from "react-icons/ai";
 
 const ItemList = () => {
@@ -18,25 +19,26 @@ const ItemList = () => {
 
             {/* Header */}
             <div className='header'>
-                <div>
-                    <div>Web name</div>
-                    <div>breadcrumb</div>
+                <div className='main'>
+                    <div className='app_title'>Reimagined guacamole</div>
+                    <div className='bradcrumb'>breadcrumb</div>
                 </div>
-                <div>cart</div>
+                <div className='cart'>
+                    <button>
+                        <AiOutlineShoppingCart />
+                    </button>
+                    <div className='cart_count'>1</div>
+                </div>
             </div>
-
 
             {/* SubHeader */}
             <div className='subheader'>
-                {/* Title */}
-                <div>Title</div>
-                {/* Search */}
-                <div>
-                    <div>Search input</div>
-                    <div>Search button</div>
+                <div className='title'>Title</div>
+                <div className='search'>
+                    <input type="search" />
+                    <button><AiOutlineSearch /></button>
                 </div>
             </div>
-
 
             {/* Items container */}
             <div className='items'>
