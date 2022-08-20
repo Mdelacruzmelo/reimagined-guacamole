@@ -38,8 +38,6 @@ const ItemList = () => {
         newData => addToCart(newData),
         {
             onSuccess: (res, data) => {
-                console.log('~ data', data)
-                console.log('~ res', res)
 
                 const newCartData = getUpdatedCartData(
                     JSON.stringify(cartData),
@@ -48,7 +46,6 @@ const ItemList = () => {
                     data.colorCode,
                     data.storageCode
                 )
-                console.log('~ newCartData', newCartData)
 
                 // This is equivalent as save it in redux,
                 localStorage.setItem('cart', JSON.stringify(newCartData))
@@ -75,7 +72,6 @@ const ItemList = () => {
     }
 
     const handleSearch = (value) => {
-        console.log('~ value', value)
         if (value && value !== "") {
             setLoadedItems(
                 itemsLS.filter(item => includesString(item?.brand, value) || includesString(item?.model, value))

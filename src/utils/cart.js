@@ -14,7 +14,6 @@ export const getUpdatedCartData = (
         return (parseInt(prev) + parseInt(current.quantity))
     }, 0)
     newCount += added
-    console.log('~ added', added)
 
     if (newItems.length > 0) {
 
