@@ -4,13 +4,13 @@ Hi! This is a technical skill test.
 
 
 ## Installation
-The project can be installed by placing in the root folder where the <span style="color: green">package.json</span> file is.
+The project can be installed by placing in the root folder where the <span style="color: green">package.json</span> file is. Execute the following command:
 ```bash
 npm install
 ```
 
 ## Usage
-Command for development mode
+We can run the project in 3 different ways. For development mode, execute:
 ```bash
 # within /reimagined-guacamole
 npm start
@@ -36,5 +36,8 @@ When selecting a product, you will need to navigate to the product details.
 This page will be divided into two columns:
 - Check a detailed image of the product on the left hand side
 - In the second column, the details and actions of the product will be displayed
+
+- I just covered one single test at least to use the command "npm run test" 
+- I could have used redux sagas or redux toolkit, but as there was a plan to save the data in localStorage, then redux was not necessary.
 
 Every feedback is welcome! 
