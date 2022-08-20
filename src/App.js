@@ -4,6 +4,7 @@ import ItemsList from './pages/ItemsList'
 import ItemDetails from './pages/ItemDetails'
 import PageNotFound from './pages/PageNotFound'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { CookiesProvider } from 'react-cookie';
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,9 @@ const App = () => useRoutes([
 const QueryWrapper = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </QueryClientProvider>
   )
 }

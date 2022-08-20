@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
 import { fetchItems } from '../services/api'
 
-const useItems = () => {
+const useItems = (itemsAlreadyExist) => {
 
-    const [items, setItems] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    const apiCall = async () => {
-        const response = await fetchItems();
-        setItems(response.data)
-        setLoading(false)
-    }
+    const [apiItems, setApiItems] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        if (!itemsAlreadyExist) {
+            setLoading(true)
+            fetchItems().then((response) => {
+                setApiItems(response.data)
+                setLoading(false)
+            });
 
-        setLoading(true)
-        apiCall();
-        setLoading(false)
+        }
+    }, [itemsAlreadyExist])
 
-    }, [])
-
-    return [loading, items]
+    return [loading, apiItems]
 }
 
 export default useItems;

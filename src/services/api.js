@@ -1,6 +1,6 @@
 
 import AxiosNaptilus from '../config/axios'
-import Routes from '../constants/routes'
+import Routes from '../constants'
 
 export const fetchItems = async () => {
     const items = await AxiosNaptilus.get(Routes.list())
