@@ -4,14 +4,14 @@ import { AiOutlineTable } from "react-icons/ai";
 import { useCookies } from 'react-cookie'
 import FadeIn from 'react-fade-in';
 import Loading from '../../components/Loading/Loading';
-import Search from '../../components/Search/Search';
+import Search from './components/Search/Search';
 import Header from '../../components/Header/Header';
 import Item from './components/Item/Item';
 import useItems from '../../hooks/useItems';
 import { naptilus_cookies } from '../../constants'
 import { fetchItem, addToCart } from '../../services/api';
 import { getUpdatedCartData } from '../../utils/cart';
-
+import { includesString } from '../../utils/search'
 
 const ItemList = () => {
 
@@ -26,6 +26,7 @@ const ItemList = () => {
 
     const [loading, apiItems] = useItems(!!itemsLS)
     const [loadedItems, setLoadedItems] = useState([])
+    const [searchValue, setSearchValue] = useState("")
 
     let cartData = localStorage.getItem('cart')
     if (cartData) cartData = JSON.parse(cartData)
@@ -33,28 +34,27 @@ const ItemList = () => {
     const cartCount = cartData?.count || 0
     const cartItems = cartData?.items || []
 
-    const {
-        isLoading: cartPosting,
-        mutate: postCart
-    } = useMutation(newData => addToCart(newData), {
-        onSuccess: (res, data) => {
-            console.log('~ data', data)
-            console.log('~ res', res)
+    const { isLoading: cartPosting, mutate: postCart } = useMutation(
+        newData => addToCart(newData),
+        {
+            onSuccess: (res, data) => {
+                console.log('~ data', data)
+                console.log('~ res', res)
 
-            const newCartData = getUpdatedCartData(
-                JSON.stringify(cartData),
-                res.data.count,
-                data.id,
-                data.colorCode,
-                data.storageCode
-            )
-            console.log('~ newCartData', newCartData)
+                const newCartData = getUpdatedCartData(
+                    JSON.stringify(cartData),
+                    res.data.count,
+                    data.id,
+                    data.colorCode,
+                    data.storageCode
+                )
+                console.log('~ newCartData', newCartData)
 
-            // This is equivalent as save it in redux,
-            localStorage.setItem('cart', JSON.stringify(newCartData))
+                // This is equivalent as save it in redux,
+                localStorage.setItem('cart', JSON.stringify(newCartData))
 
-        }
-    })
+            }
+        })
 
     const handlePostCart = async (id) => {
 
@@ -72,6 +72,19 @@ const ItemList = () => {
             console.error("Cannot add to cart a product that has not a colorº")
         }
 
+    }
+
+    const handleSearch = (value) => {
+        console.log('~ value', value)
+        if (value && value !== "") {
+            setLoadedItems(
+                itemsLS.filter(item => includesString(item?.brand, value) || includesString(item?.model, value))
+            )
+        } else {
+            setLoadedItems(itemsLS)
+        }
+
+        setSearchValue(value)
     }
 
     useEffect(() => {
@@ -103,7 +116,9 @@ const ItemList = () => {
                         List
                     </div>
                 </div>
-                <Search />
+                <Search
+                    searchValue={searchValue}
+                    handleSearch={handleSearch} />
             </div>
 
             <FadeIn className='items_fade_container'>

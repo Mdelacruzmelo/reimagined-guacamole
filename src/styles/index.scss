@@ -41,6 +41,10 @@ code {
   justify-content: center;
   align-items: center;
 }
+.flexEnd {
+  justify-content: flex-end;
+  align-items: center;
+}
 .sizeZero {
   width: 0px;
   height: 0px;
@@ -144,22 +148,13 @@ code {
 
     .search {
       width: 200px;
-      @extend .flex, .flexBetween;
+      @extend .flex, .flexEnd;
 
       input {
         height: 40px;
         width: calc(100% - 40px);
         padding: 10px;
         font-size: 1.1rem;
-      }
-
-      button {
-        height: 40px;
-        width: 40px;
-        padding: 10px;
-        &:hover {
-          cursor: pointer;
-        }
       }
     }
   }
