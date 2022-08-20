@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRoutes } from "react-router-dom";
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import ItemsList from './pages/ItemsList'
 import ItemDetails from './pages/ItemDetails'
 import PageNotFound from './pages/PageNotFound'
@@ -17,11 +17,13 @@ const App = () => useRoutes([
 
 const QueryWrapper = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
-    </QueryClientProvider>
+    <Router>
+      <QueryClientProvider client={queryClient}>
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
+      </QueryClientProvider>
+    </Router>
   )
 }
 
