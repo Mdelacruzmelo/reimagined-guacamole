@@ -1,10 +1,12 @@
 import React from 'react'
+import styles from './styles.module.scss'
 
-const Image = () => {
+const Image = ({ src }) => {
     return (
-        <div>
-            Image component
-        </div>
+        <div
+            className={styles.image_component}
+            style={{ backgroundImage: `url('${src}')` }}
+        />
     );
 }
 

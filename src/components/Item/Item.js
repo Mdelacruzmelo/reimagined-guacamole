@@ -4,26 +4,30 @@ import {
     AiOutlineArrowRight,
     AiOutlineCreditCard
 } from "react-icons/ai";
+import Image from '../Image/Image'
 import { useNavigate } from "react-router-dom";
 
-const Item = () => {
+const Item = ({
+    id,
+    brand,
+    model,
+    price,
+    imgUrl
+}) => {
 
     const navigate = useNavigate()
 
     return (
         <div className='item'>
 
-            {/* Left column */}
             <div className='left_column'>
-                {/* Left TOP */}
                 <div className='image_container'>
                     <div
                         className='image'
-                        onClick={() => { navigate(`/pjTe9sGqDQ1nPu36P5wjv`) }}>
-                        Image
+                        onClick={() => { navigate(`/${id}`) }}>
+                        <Image src={imgUrl} />
                     </div>
                 </div>
-                {/* Left BOTTOM */}
                 <div className='button_container'>
                     <button>
                         <AiOutlineShoppingCart /> Add to cart
@@ -31,23 +35,21 @@ const Item = () => {
                 </div>
             </div>
 
-            {/* Right column */}
             <div className='right_column'>
 
-                {/* Right TOP */}
                 <div className='description_container'>
-                    <div>Description</div>
+                    <div className='model'>{model}</div>
+                    <div className='brand'>{brand}</div>
                     <div className='details_button'>
-                        <div onClick={() => { navigate(`/pjTe9sGqDQ1nPu36P5wjv`) }}>
+                        <div onClick={() => { navigate(`/${id}`) }}>
                             View Details <AiOutlineArrowRight />
                         </div>
                     </div>
                     <div className='price'>
-                        199.00
+                        {price && price !== "" ? `${parseFloat(price).toFixed(2)}€` : '-'}
                     </div>
                 </div>
 
-                {/* Right BOTTOM */}
                 <div className='button_container'>
                     <button>
                         Buy now
@@ -55,7 +57,6 @@ const Item = () => {
                     </button>
                 </div>
 
-                {/* Effects background */}
                 <div className='interacting_details_background'></div>
                 <div className='interacting_buy_background'></div>
 

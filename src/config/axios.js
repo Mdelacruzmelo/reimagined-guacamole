@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const AxiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL
+const AxiosNaptilus = axios.create({
+    // baseURL: `${process.env.REACT_APP_API_URL}`
+    baseURL: "https://front-test-api.herokuapp.com/api"
 })
 
-export default AxiosInstance
+export default AxiosNaptilus
