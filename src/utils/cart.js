@@ -7,8 +7,8 @@ export const getUpdatedCartData = (
     storageCode
 ) => {
 
-    const newCartData = cartData ? JSON.parse(cartData) : { count: 0, items: [] }
-    const newItems = newCartData.items
+    const newCartData = JSON.parse(cartData)
+    const newItems = newCartData?.items || []
 
     let newCount = newItems.reduce((prev, current) => {
         return (parseInt(prev) + parseInt(current.quantity))
