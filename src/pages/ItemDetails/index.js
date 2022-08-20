@@ -6,8 +6,8 @@ import Header from '../../components/Header/Header'
 import Image from '../../components/Image/Image'
 import Description from './components/Description/Description'
 import Actions from './components/Actions/Actions'
-import { fetchItem } from '../../services/api'
-import { useQuery } from 'react-query'
+import { fetchItem, addToCart } from '../../services/api'
+import { useQuery, useMutation } from 'react-query'
 
 const ItemDetails = () => {
 
@@ -16,16 +16,26 @@ const ItemDetails = () => {
     const { isLoading, error, data } = useQuery(['item', id], () => fetchItem(id))
     const [storageCode, setStorageCode] = useState(null)
     const [colorCode, setColorCode] = useState(null)
+    const [cartCount, setCartCount] = useState();
+
+    const { isLoading: cartPosting, data: dataCart, mutate: postCart } = useMutation(newData => addToCart(newData))
 
     useEffect(() => {
 
         if (data?.data?.options)
-            setStorageCode(data?.data?.options?.storages[0])
+            setStorageCode(data?.data?.options?.storages[0]?.code)
 
         if (data?.data?.options)
-            setColorCode(data?.data?.options?.colors[0])
+            setColorCode(data?.data?.options?.colors[0]?.code)
 
     }, [data])
+
+    useEffect(() => {
+
+        if (!cartPosting)
+            setCartCount(dataCart?.data?.count)
+
+    }, [cartPosting, dataCart])
 
 
     if (isLoading) return <Loading />
@@ -51,7 +61,11 @@ const ItemDetails = () => {
     return (
         <div className='page'>
 
-            <Header detailsPage={true} />
+            <Header
+                detailsPage={true}
+                cartCount={cartCount}
+                cartLoading={cartPosting}
+            />
 
             <div className='subheader'>
                 <div className='title'>
@@ -96,7 +110,9 @@ const ItemDetails = () => {
                         <div className='price'>
                             {parseFloat(price).toFixed(2)}€
                         </div>
-                        <button>
+                        <button onClick={() => {
+                            postCart({ id, colorCode, storageCode })
+                        }}>
                             Add to cart
                         </button>
                     </div>

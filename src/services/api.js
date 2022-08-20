@@ -11,3 +11,8 @@ export const fetchItem = async (id) => {
     const item = await AxiosNaptilus.get(Routes.details(id))
     return item
 }
+
+export const addToCart = async (detailsData) => {
+    const data = await AxiosNaptilus.post(Routes.addToCart(), { ...detailsData })
+    return data
+}

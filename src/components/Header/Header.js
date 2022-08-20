@@ -1,8 +1,9 @@
 import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import PuffLoader from "react-spinners/PuffLoader";
 
-const Header = ({ detailsPage }) => {
+const Header = ({ detailsPage, cartCount, cartLoading }) => {
 
     const navigate = useNavigate()
 
@@ -19,7 +20,6 @@ const Header = ({ detailsPage }) => {
                         className={`breadcrumb_word ${detailsPage ? '' : 'active'}`}
                         onClick={() => { navigate('/') }}>List
                     </div>
-
                     {detailsPage && (
                         <>
                             /
@@ -28,15 +28,14 @@ const Header = ({ detailsPage }) => {
                             </div>
                         </>
                     )}
-
                 </div>
             </div>
 
             <div className='cart'>
                 <button>
-                    <AiOutlineShoppingCart />
+                    {cartLoading ? <div className='loader'><PuffLoader /></div> : <AiOutlineShoppingCart />}
                 </button>
-                <div className='cart_count'>1</div>
+                {cartCount > 0 && <div className='cart_count'>{cartCount}</div>}
             </div>
 
         </div>

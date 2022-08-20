@@ -92,6 +92,10 @@ code {
     .cart {
       position: relative;
 
+      .loader {
+        font-size: 0.5rem;
+      }
+
       button {
         background-color: $light-color;
         border: none;
@@ -416,7 +420,7 @@ code {
           @extend .transition;
           &:hover {
             cursor: pointer;
-            filter: brightness(1.2)
+            filter: brightness(1.2);
           }
         }
         .price {
