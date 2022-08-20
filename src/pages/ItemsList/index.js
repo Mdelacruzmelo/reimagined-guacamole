@@ -30,7 +30,7 @@ const ItemList = () => {
 
         } else if (apiItems.length > 0) {
 
-            setCookieRef.current('items_session', "items_token_name", { maxAge: 10 }) // This expires 1hr
+            setCookieRef.current('items_session', "items_token_name", { maxAge: 3600 }) // This expires 1hr
             localStorage.setItem("items_token_name", JSON.stringify(apiItems))
             setLoadedItems(apiItems)
 
