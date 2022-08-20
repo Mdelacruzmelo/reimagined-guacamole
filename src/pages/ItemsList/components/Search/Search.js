@@ -6,6 +6,7 @@ const Search = ({ searchValue, handleSearch }) => {
         <div className='search'>
             <input
                 type="search"
+                placeholder='search'
                 value={searchValue}
                 onChange={({ target }) => { handleSearch(target.value) }} />
         </div>

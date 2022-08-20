@@ -471,3 +471,56 @@ code {
     }
   }
 }
+
+/* Using SCSS variables to store breakpoints */
+$breakpoint_mobile: 500px;
+$breakpoint_tablet: 768px;
+$breakpoint_desktop: 1200px;
+$breakpoint_large_desktop: 1500px;
+
+@media (min-width: $breakpoint_large_desktop) {
+  .page {
+    width: 1200px;
+    min-width: 1200px;
+  }
+}
+@media (max-width: $breakpoint_desktop) {
+  .page .items .item {
+    height: 250px;
+    width: 33%;
+  }
+}
+@media (max-width: $breakpoint_tablet) {
+  .page .items .item {
+    height: 250px;
+    width: 50%;
+  }
+  .page .subheader {
+    padding: 0px;
+    .title {
+      padding-left: 20px;
+      padding-top: 10px;
+    }
+    .search {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+@media (max-width: $breakpoint_mobile) {
+  .page .items .item {
+    height: 250px;
+    width: 100%;
+  }
+  .page .subheader {
+    padding: 0px;
+    .title {
+      padding-left: 20px;
+      padding-top: 10px;
+    }
+    .search {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
