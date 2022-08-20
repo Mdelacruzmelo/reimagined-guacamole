@@ -1,15 +1,14 @@
 import React from 'react'
 
 const Actions = ({
-    storages,
-    storageValue,
-    setStorageCode,
-    colors,
-    colorValue,
-    setColorCode
+  storages,
+  storageValue,
+  setStorageCode,
+  colors,
+  colorValue,
+  setColorCode
 }) => {
-
-    return (
+  return (
 
         <div className='actions'>
 
@@ -41,7 +40,7 @@ const Actions = ({
 
         </div>
 
-    );
+  )
 }
 
-export default Actions;
+export default Actions

@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { fetchItems } from '../services/api'
 
 const useItems = (itemsAlreadyExist) => {
+  const [apiItems, setApiItems] = useState([])
+  const [loading, setLoading] = useState(false)
 
-    const [apiItems, setApiItems] = useState([])
-    const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    if (!itemsAlreadyExist) {
+      setLoading(true)
+      fetchItems().then((response) => {
+        setApiItems(response.data)
+        setLoading(false)
+      })
+    }
+  }, [itemsAlreadyExist])
 
-    useEffect(() => {
-        if (!itemsAlreadyExist) {
-            setLoading(true)
-            fetchItems().then((response) => {
-                setApiItems(response.data)
-                setLoading(false)
-            });
-
-        }
-    }, [itemsAlreadyExist])
-
-    return [loading, apiItems]
+  return [loading, apiItems]
 }
 
-export default useItems;
+export default useItems

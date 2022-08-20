@@ -1,25 +1,24 @@
 import React from 'react'
 import {
-    AiOutlineArrowRight,
-    AiOutlineCreditCard,
-    AiOutlineCheckCircle
-} from "react-icons/ai";
+  AiOutlineArrowRight,
+  AiOutlineCreditCard,
+  AiOutlineCheckCircle
+} from 'react-icons/ai'
 import Image from '../../../../components/Image/Image'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 const Item = ({
-    id,
-    brand,
-    model,
-    price,
-    imgUrl,
-    inCart,
-    handlePostCart
+  id,
+  brand,
+  model,
+  price,
+  imgUrl,
+  inCart,
+  handlePostCart
 }) => {
-
-    const navigate = useNavigate()
-    const disabled = price === "" || !price
-    return (
+  const navigate = useNavigate()
+  const disabled = price === '' || !price
+  return (
         <div className={`${disabled ? 'disabled' : ''} item`}>
 
             <div className='left_column'>
@@ -54,27 +53,28 @@ const Item = ({
 
                 {!disabled && (
                     <div className='button_container'>
-                        {inCart ? (
+                        {inCart
+                          ? (
                             <button className='in_cart' onClick={() => { handlePostCart(id) }}>
                                 Add more <AiOutlineCheckCircle />
                             </button>
-                        ) : (
+                            )
+                          : (
                             <button onClick={() => { handlePostCart(id) }}>
                                 Add to cart <AiOutlineCreditCard />
                             </button>
-                        )}
+                            )}
                     </div>
                 )}
 
                 <div className='interacting_details_background'></div>
                 <div className='interacting_buy_background'></div>
 
-
             </div>
 
         </div>
 
-    );
+  )
 }
 
-export default Item;
+export default Item

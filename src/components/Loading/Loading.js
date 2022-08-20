@@ -1,9 +1,9 @@
-import React from 'react';
-import FadeIn from 'react-fade-in';
-import BarLoader from "react-spinners/BarLoader";
+import React from 'react'
+import FadeIn from 'react-fade-in'
+import BarLoader from 'react-spinners/BarLoader'
 
 const Loading = () => {
-    return (
+  return (
         <FadeIn>
             <div className='page'>
                 <div className='items'>
@@ -14,7 +14,7 @@ const Loading = () => {
                 </div>
             </div>
         </FadeIn>
-    );
+  )
 }
 
-export default Loading;
+export default Loading

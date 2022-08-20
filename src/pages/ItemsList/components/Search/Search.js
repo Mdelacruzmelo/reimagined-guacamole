@@ -1,8 +1,7 @@
 import React from 'react'
 
 const Search = ({ searchValue, handleSearch }) => {
-
-    return (
+  return (
         <div className='search'>
             <input
                 type="search"
@@ -10,7 +9,7 @@ const Search = ({ searchValue, handleSearch }) => {
                 value={searchValue}
                 onChange={({ target }) => { handleSearch(target.value) }} />
         </div>
-    );
+  )
 }
 
-export default Search;
+export default Search

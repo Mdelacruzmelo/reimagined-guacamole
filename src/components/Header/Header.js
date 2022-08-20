@@ -1,13 +1,12 @@
 import React from 'react'
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import PuffLoader from "react-spinners/PuffLoader";
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
+import PuffLoader from 'react-spinners/PuffLoader'
 
 const Header = ({ detailsPage, cartCount, cartLoading }) => {
+  const navigate = useNavigate()
 
-    const navigate = useNavigate()
-
-    return (
+  return (
         <div className='header'>
             <div className='main'>
                 <div
@@ -39,7 +38,7 @@ const Header = ({ detailsPage, cartCount, cartLoading }) => {
             </div>
 
         </div>
-    );
+  )
 }
 
-export default Header;
+export default Header

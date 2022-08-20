@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './styles.module.scss'
 
 const Image = ({ src }) => {
-    return (
+  return (
         <div
             className={styles.image_component}
             style={{ backgroundImage: `url('${src}')` }}
         />
-    );
+  )
 }
 
-export default Image;
+export default Image

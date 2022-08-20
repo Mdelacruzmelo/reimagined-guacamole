@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from "react-router-dom"
-import { AiOutlineInfoCircle } from "react-icons/ai"
+import { useParams, useNavigate } from 'react-router-dom'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 import Loading from '../../components/Loading/Loading'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image/Image'
@@ -11,66 +11,58 @@ import { useQuery, useMutation } from 'react-query'
 import { getUpdatedCartData } from '../../utils/cart'
 
 const ItemDetails = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { isLoading, error, data } = useQuery(['item', id], () => fetchItem(id))
+  const [storageCode, setStorageCode] = useState(null)
+  const [colorCode, setColorCode] = useState(null)
+  const cartData = localStorage.getItem('cart')
 
-    const { id } = useParams()
-    const navigate = useNavigate()
-    const { isLoading, error, data } = useQuery(['item', id], () => fetchItem(id))
-    const [storageCode, setStorageCode] = useState(null)
-    const [colorCode, setColorCode] = useState(null)
-    const cartData = localStorage.getItem('cart')
+  const {
+    isLoading: cartPosting,
+    mutate: postCart
+  } = useMutation(newData => addToCart(newData), {
+    onSuccess: (res) => {
+      const newCartData = getUpdatedCartData(
+        cartData,
+        res.data.count,
+        id,
+        colorCode,
+        storageCode
+      )
 
-    const {
-        isLoading: cartPosting,
-        mutate: postCart
-    } = useMutation(newData => addToCart(newData), {
-        onSuccess: (res) => {
+      // This is equivalent as save it in redux,
+      localStorage.setItem('cart', JSON.stringify(newCartData))
+    }
+  })
 
-            const newCartData = getUpdatedCartData(
-                cartData,
-                res.data.count,
-                id,
-                colorCode,
-                storageCode
-            )
+  useEffect(() => {
+    if (data?.data?.options) { setStorageCode(data?.data?.options?.storages[0]?.code) }
 
-            // This is equivalent as save it in redux,
-            localStorage.setItem('cart', JSON.stringify(newCartData))
+    if (data?.data?.options) { setColorCode(data?.data?.options?.colors[0]?.code) }
+  }, [data])
 
-        }
-    })
+  if (isLoading) return <Loading />
+  if (error) navigate('/404')
 
-    useEffect(() => {
+  const {
+    imgUrl,
+    brand,
+    model,
+    price,
+    cpu,
+    internalMemory,
+    os,
+    displayResolution,
+    battery,
+    primaryCamera,
+    secondaryCamera,
+    dimentions,
+    weight,
+    options
+  } = data.data
 
-        if (data?.data?.options)
-            setStorageCode(data?.data?.options?.storages[0]?.code)
-
-        if (data?.data?.options)
-            setColorCode(data?.data?.options?.colors[0]?.code)
-
-    }, [data])
-
-
-    if (isLoading) return <Loading />
-    if (error) navigate('/404')
-
-    const {
-        imgUrl,
-        brand,
-        model,
-        price,
-        cpu,
-        internalMemory,
-        os,
-        displayResolution,
-        battery,
-        primaryCamera,
-        secondaryCamera,
-        dimentions,
-        weight,
-        options
-    } = data.data
-
-    return (
+  return (
         <div className='page'>
 
             <Header
@@ -96,17 +88,17 @@ const ItemDetails = () => {
                 <div className='details_container'>
                     <Description
                         item={{
-                            brand: brand,
-                            model: model,
-                            cpu: cpu,
-                            internalMemory: internalMemory,
-                            os: os,
-                            displayResolution: displayResolution,
-                            battery: battery,
-                            primaryCamera: primaryCamera,
-                            secondaryCamera: secondaryCamera,
-                            dimentions: dimentions,
-                            weight: weight,
+                          brand,
+                          model,
+                          cpu,
+                          internalMemory,
+                          os,
+                          displayResolution,
+                          battery,
+                          primaryCamera,
+                          secondaryCamera,
+                          dimentions,
+                          weight
                         }}
                     />
                     <Actions
@@ -123,7 +115,7 @@ const ItemDetails = () => {
                             {parseFloat(price).toFixed(2)}€
                         </div>
                         <button onClick={() => {
-                            postCart({ id, colorCode, storageCode })
+                          postCart({ id, colorCode, storageCode })
                         }}>
                             Add to cart
                         </button>
@@ -132,7 +124,7 @@ const ItemDetails = () => {
                 </div>
             </div>
         </div>
-    );
+  )
 }
 
-export default ItemDetails;
+export default ItemDetails
