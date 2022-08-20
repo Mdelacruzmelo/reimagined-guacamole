@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    AiOutlineShoppingCart,
     AiOutlineArrowRight,
     AiOutlineCreditCard
 } from "react-icons/ai";
@@ -16,9 +15,9 @@ const Item = ({
 }) => {
 
     const navigate = useNavigate()
-
+    const disabled = price === "" || !price
     return (
-        <div className='item'>
+        <div className={`${disabled ? 'disabled' : ''} item`}>
 
             <div className='left_column'>
                 <div className='image_container'>
@@ -28,11 +27,6 @@ const Item = ({
                         <Image src={imgUrl} />
                     </div>
                 </div>
-                <div className='button_container'>
-                    <button>
-                        <AiOutlineShoppingCart /> Add to cart
-                    </button>
-                </div>
             </div>
 
             <div className='right_column'>
@@ -40,22 +34,29 @@ const Item = ({
                 <div className='description_container'>
                     <div className='model'>{model}</div>
                     <div className='brand'>{brand}</div>
-                    <div className='details_button'>
-                        <div onClick={() => { navigate(`/${id}`) }}>
-                            View Details <AiOutlineArrowRight />
-                        </div>
-                    </div>
-                    <div className='price'>
-                        {price && price !== "" ? `${parseFloat(price).toFixed(2)}€` : '-'}
-                    </div>
+                    {!disabled && (
+                        <>
+                            <div className='details_button'>
+                                <div onClick={() => { navigate(`/${id}`) }}>
+                                    View Details <AiOutlineArrowRight />
+                                </div>
+                            </div>
+                            <div className='price'>
+                                {`${parseFloat(price).toFixed(2)}€`}
+                            </div>
+                        </>
+                    )}
+
                 </div>
 
-                <div className='button_container'>
-                    <button>
-                        Buy now
-                        <AiOutlineCreditCard />
-                    </button>
-                </div>
+                {!disabled && (
+                    <div className='button_container'>
+                        <button>
+                            Add to cart
+                            <AiOutlineCreditCard />
+                        </button>
+                    </div>
+                )}
 
                 <div className='interacting_details_background'></div>
                 <div className='interacting_buy_background'></div>

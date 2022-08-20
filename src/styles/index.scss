@@ -128,6 +128,7 @@ code {
     height: 80px;
     padding: 20px;
     background-color: $light-color;
+    box-shadow: 0px 10px 14px -4px #0000001f;
     @extend .flex, .flexBetween;
 
     .title {
@@ -185,6 +186,11 @@ code {
       width: 25%;
       z-index: 1;
       @extend .flex, .flexStart, .transition;
+
+      &.disabled {
+        filter: opacity(0.2) brightness(0.8);
+        pointer-events: none;
+      }
 
       .left_column {
         width: 55%;
