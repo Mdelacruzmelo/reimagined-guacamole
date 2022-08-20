@@ -276,6 +276,11 @@ code {
             text-align: center;
             font-weight: bold;
 
+            &.in_cart {
+              background-color: $dark-color-10;
+              color: $light-color;
+            }
+
             @extend .transition, .flex, .flexBetween;
             &:hover {
               cursor: pointer;

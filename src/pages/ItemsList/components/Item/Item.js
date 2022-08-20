@@ -13,7 +13,8 @@ const Item = ({
     model,
     price,
     imgUrl,
-    inCart
+    inCart,
+    handlePostCart
 }) => {
 
     const navigate = useNavigate()
@@ -54,9 +55,13 @@ const Item = ({
                 {!disabled && (
                     <div className='button_container'>
                         {inCart ? (
-                            <button>In cart <AiOutlineCheckCircle /></button>
+                            <button className='in_cart' onClick={() => { handlePostCart(id) }}>
+                                Add more <AiOutlineCheckCircle />
+                            </button>
                         ) : (
-                            <button> Add to cart <AiOutlineCreditCard /> </button>
+                            <button onClick={() => { handlePostCart(id) }}>
+                                Add to cart <AiOutlineCreditCard />
+                            </button>
                         )}
                     </div>
                 )}

@@ -8,6 +8,7 @@ import Description from './components/Description/Description'
 import Actions from './components/Actions/Actions'
 import { fetchItem, addToCart } from '../../services/api'
 import { useQuery, useMutation } from 'react-query'
+import { getUpdatedCartData } from '../../utils/cart'
 
 const ItemDetails = () => {
 
@@ -24,44 +25,16 @@ const ItemDetails = () => {
     } = useMutation(newData => addToCart(newData), {
         onSuccess: (res) => {
 
-            const newCartData = cartData ? JSON.parse(cartData) : { count: 0, items: [] };
-            const newItems = newCartData.items
-            console.log('~ newItems', newItems)
-
-            let newCount = newItems.reduce((prev, current) => {
-                return (parseInt(prev) + parseInt(current.quantity))
-            }, 0)
-            newCount += res.data.count
-            console.log('~ newCount', newCount)
-
-            if (newItems.length > 0) {
-
-                const ItemIndex = newItems.findIndex((cartObj) => {
-                    return cartObj.id === id &&
-                        cartObj.colorCode === colorCode &&
-                        cartObj.storageCode === storageCode
-                })
-
-                // It means it is already in cart
-                if (ItemIndex !== -1) {
-                    newItems[ItemIndex] = {
-                        ...newItems[ItemIndex],
-                        quantity: newItems[ItemIndex].quantity + res.data.count
-                    }
-                }
-
-            } else {
-
-                newItems.push({
-                    id,
-                    colorCode,
-                    storageCode,
-                    quantity: res.data.count
-                });
-            }
+            const newCartData = getUpdatedCartData(
+                cartData,
+                res.data.count,
+                id,
+                colorCode,
+                storageCode
+            )
 
             // This is equivalent as save it in redux,
-            localStorage.setItem('cart', JSON.stringify({ count: newCount, items: newItems }))
+            localStorage.setItem('cart', JSON.stringify(newCartData))
 
         }
     })
