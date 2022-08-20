@@ -8,13 +8,13 @@ import Search from './components/Search/Search'
 import Header from '../../components/Header/Header'
 import Item from './components/Item/Item'
 import useItems from '../../hooks/useItems'
-import { naptilus_cookies } from '../../constants'
+import { naptilusCookies } from '../../constants'
 import { fetchItem, addToCart } from '../../services/api'
 import { getUpdatedCartData } from '../../utils/cart'
 import { includesString } from '../../utils/search'
 
 const ItemList = () => {
-  const [cookies, setCookie] = useCookies([naptilus_cookies])
+  const [cookies, setCookie] = useCookies([naptilusCookies])
   const sessionName = cookies.items_session
 
   let itemsLS = localStorage.getItem(sessionName) // maybe cookie is expired and itemsLS is undefined
@@ -89,48 +89,48 @@ const ItemList = () => {
   if (loading) return <Loading />
 
   return (
-        <div className='page'>
+    <div className='page'>
 
-            <Header cartCount={cartCount} cartLoading={cartPosting} />
+      <Header cartCount={cartCount} cartLoading={cartPosting} />
 
-            <div className='subheader'>
-                <div className='title'>
-                    <AiOutlineTable />
-                    <div className='title_word'>
-                        List
-                    </div>
-                </div>
-                <Search
-                    searchValue={searchValue}
-                    handleSearch={handleSearch} />
-            </div>
-
-            <FadeIn className='items_fade_container'>
-                <div className='items'>
-
-                    {!loading && loadedItems && loadedItems.length > 0 && (
-
-                      loadedItems.map((item, index) => {
-                        const inCart = cartItems.findIndex(cartItem => cartItem.id === item.id) !== -1
-
-                        return (
-                                <Item
-                                    key={index}
-                                    id={item.id}
-                                    brand={item.brand}
-                                    model={item.model}
-                                    price={item.price}
-                                    imgUrl={item.imgUrl}
-                                    inCart={inCart}
-                                    handlePostCart={handlePostCart}
-                                />
-                        )
-                      })
-                    )}
-                </div>
-            </FadeIn>
-
+      <div className='subheader'>
+        <div className='title'>
+          <AiOutlineTable />
+          <div className='title_word'>
+            List
+          </div>
         </div>
+        <Search
+          searchValue={searchValue}
+          handleSearch={handleSearch} />
+      </div>
+
+      <FadeIn className='items_fade_container'>
+        <div className='items'>
+
+          {!loading && loadedItems && loadedItems.length > 0 && (
+
+            loadedItems.map((item, index) => {
+              const inCart = cartItems.findIndex(cartItem => cartItem.id === item.id) !== -1
+
+              return (
+                <Item
+                  key={index}
+                  id={item.id}
+                  brand={item.brand}
+                  model={item.model}
+                  price={item.price}
+                  imgUrl={item.imgUrl}
+                  inCart={inCart}
+                  handlePostCart={handlePostCart}
+                />
+              )
+            })
+          )}
+        </div>
+      </FadeIn>
+
+    </div>
   )
 }
 

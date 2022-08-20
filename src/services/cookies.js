@@ -1,8 +1,8 @@
 import { useCookies } from 'react-cookie'
-import { naptilus_cookies } from '../constants'
+import { naptilusCookies } from '../constants'
 
 const CookieManager = () => {
-  const [cookies, setCookie, removeCookie] = useCookies([naptilus_cookies])
+  const [cookies, setCookie, removeCookie] = useCookies([naptilusCookies])
   return {
     cookies,
     setCookie,

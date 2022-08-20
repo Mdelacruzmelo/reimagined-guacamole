@@ -1,11 +1,6 @@
-/* eslint-disable testing-library/no-debugging-utils */
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable testing-library/render-result-naming-convention */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
-import { prettyDOM } from '@testing-library/dom'
 import Item from './Item'
 const mockedUsedNavigate = jest.fn()
 
@@ -26,14 +21,14 @@ test('Renders normally', () => {
     handlePostCart: () => { }
   }
   const component = render(
-        <Item
-            id={item.id}
-            brand={item.brand}
-            model={item.model}
-            price={item.price}
-            imgUrl={item.imgUrl}
-            inCart={item.inCart}
-        />
+    <Item
+      id={item.id}
+      brand={item.brand}
+      model={item.model}
+      price={item.price}
+      imgUrl={item.imgUrl}
+      inCart={item.inCart}
+    />
   )
   component.getByText('brand')// simple render works
   component.getByText('999.00€') // to .toFixed(2) works

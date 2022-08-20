@@ -7,6 +7,6 @@ const Routes = {
   addToCart: () => '/cart'
 }
 
-export const naptilus_cookies = 'naptilus_cookies'
+export const naptilusCookies = 'naptilusCookies'
 
 export default Routes
