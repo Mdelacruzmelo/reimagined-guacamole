@@ -1,7 +1,8 @@
 import React from 'react'
 import {
     AiOutlineArrowRight,
-    AiOutlineCreditCard
+    AiOutlineCreditCard,
+    AiOutlineCheckCircle
 } from "react-icons/ai";
 import Image from '../../../../components/Image/Image'
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,8 @@ const Item = ({
     brand,
     model,
     price,
-    imgUrl
+    imgUrl,
+    inCart
 }) => {
 
     const navigate = useNavigate()
@@ -51,10 +53,11 @@ const Item = ({
 
                 {!disabled && (
                     <div className='button_container'>
-                        <button>
-                            Add to cart
-                            <AiOutlineCreditCard />
-                        </button>
+                        {inCart ? (
+                            <button>In cart <AiOutlineCheckCircle /></button>
+                        ) : (
+                            <button> Add to cart <AiOutlineCreditCard /> </button>
+                        )}
                     </div>
                 )}
 

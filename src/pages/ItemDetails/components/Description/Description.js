@@ -1,12 +1,10 @@
 import React from 'react'
 
 const Description = ({ item }) => {
-    
+
     return (
 
         <div className='description'>
-
-            <div className='title'>Description</div>
 
             {Object.keys(item).map((property, index) => {
 

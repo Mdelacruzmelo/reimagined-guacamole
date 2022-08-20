@@ -16,9 +16,55 @@ const ItemDetails = () => {
     const { isLoading, error, data } = useQuery(['item', id], () => fetchItem(id))
     const [storageCode, setStorageCode] = useState(null)
     const [colorCode, setColorCode] = useState(null)
-    const [cartCount, setCartCount] = useState();
+    const cartData = localStorage.getItem('cart')
 
-    const { isLoading: cartPosting, data: dataCart, mutate: postCart } = useMutation(newData => addToCart(newData))
+    const {
+        isLoading: cartPosting,
+        mutate: postCart
+    } = useMutation(newData => addToCart(newData), {
+        onSuccess: (res) => {
+
+            const newCartData = cartData ? JSON.parse(cartData) : { count: 0, items: [] };
+            const newItems = newCartData.items
+            console.log('~ newItems', newItems)
+
+            let newCount = newItems.reduce((prev, current) => {
+                return (parseInt(prev) + parseInt(current.quantity))
+            }, 0)
+            newCount += res.data.count
+            console.log('~ newCount', newCount)
+
+            if (newItems.length > 0) {
+
+                const ItemIndex = newItems.findIndex((cartObj) => {
+                    return cartObj.id === id &&
+                        cartObj.colorCode === colorCode &&
+                        cartObj.storageCode === storageCode
+                })
+
+                // It means it is already in cart
+                if (ItemIndex !== -1) {
+                    newItems[ItemIndex] = {
+                        ...newItems[ItemIndex],
+                        quantity: newItems[ItemIndex].quantity + res.data.count
+                    }
+                }
+
+            } else {
+
+                newItems.push({
+                    id,
+                    colorCode,
+                    storageCode,
+                    quantity: res.data.count
+                });
+            }
+
+            // This is equivalent as save it in redux,
+            localStorage.setItem('cart', JSON.stringify({ count: newCount, items: newItems }))
+
+        }
+    })
 
     useEffect(() => {
 
@@ -29,13 +75,6 @@ const ItemDetails = () => {
             setColorCode(data?.data?.options?.colors[0]?.code)
 
     }, [data])
-
-    useEffect(() => {
-
-        if (!cartPosting)
-            setCartCount(dataCart?.data?.count)
-
-    }, [cartPosting, dataCart])
 
 
     if (isLoading) return <Loading />
@@ -63,7 +102,7 @@ const ItemDetails = () => {
 
             <Header
                 detailsPage={true}
-                cartCount={cartCount}
+                cartCount={cartData ? JSON.parse(cartData).count : 0}
                 cartLoading={cartPosting}
             />
 
