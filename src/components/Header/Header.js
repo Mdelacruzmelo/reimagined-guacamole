@@ -23,20 +23,22 @@ const Header = ({ detailsPage }) => {
                     {detailsPage && (
                         <>
                             /
-                            <div
-                                className={`breadcrumb_word ${detailsPage ? 'active' : ''}`}>Details
+                            <div className={`breadcrumb_word ${detailsPage ? 'active' : ''}`}>
+                                Details
                             </div>
                         </>
                     )}
 
                 </div>
             </div>
+
             <div className='cart'>
                 <button>
                     <AiOutlineShoppingCart />
                 </button>
                 <div className='cart_count'>1</div>
             </div>
+
         </div>
     );
 }

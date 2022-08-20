@@ -4,7 +4,7 @@ import FadeIn from 'react-fade-in';
 import Loading from '../../components/Loading/Loading';
 import Search from '../../components/Search/Search';
 import Header from '../../components/Header/Header';
-import Item from '../../components/Item/Item';
+import Item from './components/Item/Item';
 import useItems from '../../hooks/useItems';
 
 const ItemList = () => {

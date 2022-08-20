@@ -4,7 +4,7 @@ import {
     AiOutlineArrowRight,
     AiOutlineCreditCard
 } from "react-icons/ai";
-import Image from '../Image/Image'
+import Image from '../../../../components/Image/Image'
 import { useNavigate } from "react-router-dom";
 
 const Item = ({
