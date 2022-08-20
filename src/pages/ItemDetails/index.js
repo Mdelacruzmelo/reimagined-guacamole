@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 // import FadeIn from 'react-fade-in';
