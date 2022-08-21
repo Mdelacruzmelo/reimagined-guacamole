@@ -26,6 +26,13 @@ Command for test mode
 npm run test
 ```
 
+Command for fix format with ESLint
+```bash
+# within /reimagined-guacamole
+npm run lint
+# If it doens't show anything, then all is ok
+```
+
 ## Additional
 
 ### <span style="color: green"><span style="font-weight: bold">PLP</span> -  Product List Page</span>
